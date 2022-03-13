@@ -1,0 +1,134 @@
+@font-face {
+  font-family: Retro;
+  src: url(./assets/retro-font.ttf);
+}
+
+:root {
+  --black: rgba(0,0,0,1);
+  --green: rgb(97 170 8);
+  --green-light: rgb(44 255 21);
+  --yellow: #F6EB14;
+  --red: #EF4423;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Retro, serif;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.app {
+  width: 200px;
+  margin: 0 auto;
+  padding: 1rem;
+  text-transform: uppercase;
+  border-radius: 4px;
+  background: linear-gradient(326deg, var(--black) 0%, var(--green) 100%);
+}
+
+.header {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--yellow);
+  text-shadow: 2px 2px 2px var(--green);
+}
+
+.game-object {
+  position: absolute;
+}
+
+.display {
+  height: 200px;
+  background-color: var(--black);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--green);
+  box-shadow: 2px 2px 6px 1px var(--black);
+}
+
+.display__earth {
+  border: 2px dotted var(--yellow);
+  height: 35%;
+  border-radius: 50%;
+  position: absolute;
+  width: 100%;
+  top: 85%;
+}
+
+.display__ship {
+  bottom: 0;
+  left: 85px;
+}
+
+.display__shot {
+  bottom: 55px;
+  left: 95px;
+}
+
+.display__alien {
+  top: 35px;
+  left: 135px;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.6rem;
+  padding: 0.6rem;
+  text-align: center;
+  color: var(--yellow);
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.controls > * {
+  width: 30%;
+  font-size: 0.75rem;
+  outline: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.controls__input {
+  padding: 0.25rem;
+  color: var(--yellow);
+  border: 2px solid var(--green);
+  background-color: var(--black);
+}
+
+.controls__input:focus {
+  outline: none;
+}
+
+.controls__shot {
+  color: var(--black);
+  border: 2px solid var(--green-light);
+  background: var(--yellow);
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.controls__shot:hover {
+  animation-name: alarm;
+}
+
+@keyframes alarm {
+  from {
+    background: var(--yellow);
+  }
+  to {
+    background: var(--red);
+  }
+}

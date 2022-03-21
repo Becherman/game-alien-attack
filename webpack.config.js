@@ -1,4 +1,5 @@
-const path = require('path');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = (env) => ({
   entry: './src/index.ts',
@@ -7,11 +8,9 @@ module.exports = (env) => ({
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        loader: 'ts-loader',
         exclude: /node_modules/,
       },
-    ],
-    rules: [
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
@@ -30,4 +29,10 @@ module.exports = (env) => ({
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
-});
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Alien Attack!',
+      template: 'index.html',
+    }),
+  ],
+})

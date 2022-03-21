@@ -1,8 +1,11 @@
 <html>
   <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -10,35 +13,38 @@
       <section class="app">
         <header class="header">ALIEN ATTACK!</header>
 
-        <div class="display">
+        <div id="display" class="display">
           <div class="display__earth"></div>
-          <div class="display__ship game-object">
-            <img src="./assets/ship.png" width="25" height="25" />
+          <div id="ship" class="display__ship game-object">
+            <img src="./assets/ship.png" />
           </div>
-          <div class="display__alien game-object">
-            <img src="./assets/alien.png" height="20" />
+          <div id="alien" class="display__alien game-object">
+            <img src="./assets/alien.png" />
           </div>
 
-          <div class="display__shot game-object">
-            <img src="./assets/shot.png" height="30" />
+          <div id="explosion" class="display__explosion game-object">
+            <img src="./assets/explosion.png" />
+          </div>
+
+          <div id="missile" class="display__missile game-object">
+            <img src="./assets/shot.png" />
           </div>
         </div>
 
         <div class="stats">
           <span class="stats__shot-result">miss!</span>
           <span class="stats__shots-number">
-            shots:   <span id="shotsNumber">4</span>, remaining:   <span id="remainingsNumber">4</span>
+            shots: <span id="shotsNumber">4</span>, remaining:
+            <span id="remainingsNumber">4</span>
           </span>
         </div>
 
         <div class="controls">
-          <input id="xCoords" class="controls__input" type="text" value="200" />
-          <input id="yCoords" class="controls__input" type="text" value="50" />
+          <input id="xCoords" class="controls__input" type="text" value="0" />
+          <input id="yCoords" class="controls__input" type="text" value="0" />
           <button id="shot" class="controls__shot">fire!</button>
         </div>
       </section>
     </div>
-
-    <script type="text/javascript" src="dist/bundle.js"></script>
   </body>
 </html>

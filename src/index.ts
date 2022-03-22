@@ -1,20 +1,20 @@
 import '../styles.css'
 
 /**
- * Set alien initial position
+ *
  */
+const getRandomPosition = () => Math.floor(Math.random() * 200)
 
 document.addEventListener('DOMContentLoaded', function () {
   /**
    * Defining game variables
    */
-  const alienX = 0
+  let alienX = 0
   let alienY = 0
   const totalShots = 5
   let remainingShots = 5
-  const missingShots = 0
   const shipWidth = 25
-  const shipHeight = 0
+  const shipHeight = 25
   let isWin = false
 
   /**
@@ -34,12 +34,32 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!alienElem) return
   if (!shotsNumberElem) return
   if (!remainingsNumberElem) return
+  if (!shipElem) return
+  if (!explosionElem) return
 
   shotsNumberElem.innerHTML = String(totalShots)
   remainingsNumberElem.innerHTML = String(remainingShots)
 
   alienElem.style.top = String(alienY)
   alienElem.style.left = String(alienX)
+
+  const initializeGameObjects = () => {
+    alienX = getRandomPosition()
+    alienY = 0
+    alienElem.style.top = `${alienY}px`
+    alienElem.style.left = `${alienX}px`
+
+    explosionElem.style.display = 'none'
+    alienElem.style.display = 'block'
+
+    xCoordsElem.value = '0'
+    yCoordsElem.value = '0'
+
+    shipElem.style.left = '100px'
+
+    remainingShots = totalShots
+    remainingsNumberElem.innerHTML = String(remainingShots)
+  }
 
   const launchMissile = (x: number) => {
     if (!missileElem || !displayElem) return
@@ -71,6 +91,11 @@ document.addEventListener('DOMContentLoaded', function () {
       explosionElem.style.left = `${alienX}`
       explosionElem.style.top = `${alienY}`
       alienElem.style.display = 'none'
+
+      setTimeout(() => {
+        alert('You Win!')
+        initializeGameObjects()
+      }, 500)
     } else {
       remainingShots = --remainingShots
       remainingsNumberElem.innerHTML = String(remainingShots)
@@ -80,8 +105,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (remainingShots === 0) {
         setTimeout(() => {
-          return
-        }, 0)
+          alert('You lose!')
+          initializeGameObjects()
+        }, 500)
       }
     }
   }

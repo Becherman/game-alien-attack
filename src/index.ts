@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let remainingShots = 5
   const shipWidth = 25
   const shipHeight = 25
-  let isWin = false
+  let isWon = false
 
   /**
    * Getting elements
@@ -30,6 +30,16 @@ document.addEventListener('DOMContentLoaded', function () {
   const shotElem = document.getElementById('shot')
   const shotsNumberElem = document.getElementById('shotsNumber')
   const remainingsNumberElem = document.getElementById('remainingsNumber')
+
+  /**
+   * Audio elements
+   */
+  const levelAudio = new Audio('../assets/main.ogg')
+  levelAudio.loop = true
+  levelAudio.autoplay = true
+
+  const missileAudio = new Audio('../assets/missile.ogg')
+  const explosionAudio = new Audio('../assets/explosion.ogg')
 
   if (!alienElem) return
   if (!shotsNumberElem) return
@@ -64,6 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const launchMissile = (x: number) => {
     if (!missileElem || !displayElem) return
 
+    missileAudio.play()
+    
     missileElem.style.opacity = '1'
     missileElem.style.left = `${x + shipWidth / 2}px`
     missileElem.style.top = `${0}px`
@@ -86,17 +98,19 @@ document.addEventListener('DOMContentLoaded', function () {
     missileElem.style.opacity = '0'
     missileElem.style.top = `${displayHeight - shipHeight}px`
 
-    if (isWin) {
+    if (isWon) {
+      explosionAudio.play()
+      levelAudio.pause();
       explosionElem.style.display = 'block'
       explosionElem.style.left = `${alienX}`
       explosionElem.style.top = `${alienY}`
       alienElem.style.display = 'none'
 
       setTimeout(() => {
-        alert('You Win!')
+        alert('You won!')
         initializeGameObjects()
       }, 500)
-    } else {
+    } else {      
       remainingShots = --remainingShots
       remainingsNumberElem.innerHTML = String(remainingShots)
 
@@ -132,15 +146,17 @@ document.addEventListener('DOMContentLoaded', function () {
       return
     }
 
+    levelAudio.play()
+    
     const x = parseInt(xCoordsElem.value, 10)
     const y = parseInt(yCoordsElem.value, 10)
 
     shipElem.style.left = `${x}px`
 
     if (alienPositionIsGuessed(x, y)) {
-      isWin = true
+      isWon = true
     } else {
-      isWin = false
+      isWon = false
     }
 
     setTimeout(() => launchMissile(x), 200)
